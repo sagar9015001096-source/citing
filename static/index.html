@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Home — Electricity Consumption Predictor</title>
+    <link rel="stylesheet" href="css/styles.css">
+  </head>
+  <body>
+    <div class="container">
+      <nav class="nav">
+        <div class="brand">Electricity Predictor</div>
+        <div>
+          <a href="index.html">Home</a>
+          <a href="dashboard.html">Dashboard</a>
+          <a href="about.html">About</a>
+          <a href="../app.py">Streamlit App</a>
+        </div>
+      </nav>
+
+      <section class="hero">
+        <div>
+          <h1>Welcome</h1>
+          <p>A lightweight static home page for the Electricity Consumption Predictor project. Visit the Streamlit app for interactive predictions.</p>
+        </div>
+        <div>
+          <img src="" alt="" style="width:120px;opacity:0.6"/>
+        </div>
+      </section>
+
+      <div class="cards">
+        <div class="card">
+          <div class="metric">Local Run</div>
+          <div class="metric-label">Run the Streamlit app locally: <code>python -m streamlit run app.py</code></div>
+        </div>
+        <div class="card">
+          <div class="metric">Deployed</div>
+          <div class="metric-label">Deploy to Streamlit Cloud from your GitHub repo.</div>
+        </div>
+        <div class="card">
+          <div class="metric">Model</div>
+          <div class="metric-label">The app loads `electricity_model.pkl` or trains from the CSV fallback.</div>
+        </div>
+      </div>
+
+      <div class="footer">Project files: <code>app.py</code> • <code>electricity_consumption_dataset.csv</code></div>
+    </div>
+  </body>
+</html>
