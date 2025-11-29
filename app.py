@@ -3,8 +3,6 @@ import pandas as pd
 import joblib
 import traceback
 import os
-import pathlib
-import streamlit.components.v1 as components
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import r2_score
@@ -12,34 +10,6 @@ from sklearn.metrics import r2_score
 
 st.set_page_config(page_title="Electricity Consumption Predictor", layout="wide")
 st.title("⚡ Electricity Consumption Predictor")
-
-# Simple navigation: choose between the Streamlit app and the static pages
-PAGES = ["App (Predict)", "Home (Static)", "Dashboard (Static)", "About (Static)"]
-page = st.sidebar.selectbox("Navigate", PAGES)
-
-def render_static_page(name: str):
-    # locate static HTML file and render its contents inside the Streamlit app
-    base = pathlib.Path(__file__).parent / "static"
-    if name == "Home (Static)":
-        path = base / "index.html"
-    elif name == "Dashboard (Static)":
-        path = base / "dashboard.html"
-    elif name == "About (Static)":
-        path = base / "about.html"
-    else:
-        st.error("Unknown static page")
-        return
-
-    if not path.exists():
-        st.error(f"Static file not found: {path}")
-        return
-
-    html = path.read_text(encoding="utf-8")
-    components.html(html, height=800, scrolling=True)
-
-if page != "App (Predict)":
-    render_static_page(page)
-    st.stop()
 
 def train_and_save_model(csv_path: str, model_path: str):
     df = pd.read_csv(csv_path)
