@@ -56,6 +56,28 @@ def train_and_save_model(csv_path: str, model_path: str):
 
 model = None
 model_path = "electricity_model.pkl"
+model_url = os.getenv("MODEL_URL")
+
+def download_model_from_url(url: str, dest: str) -> bool:
+    try:
+        import requests
+        with requests.get(url, stream=True, timeout=30) as r:
+            r.raise_for_status()
+            with open(dest, "wb") as f:
+                for chunk in r.iter_content(chunk_size=8192):
+                    if chunk:
+                        f.write(chunk)
+        return True
+    except Exception:
+        return False
+if not os.path.exists(model_path) and model_url:
+    with st.spinner("Downloading model from MODEL_URL..."):
+        ok = download_model_from_url(model_url, model_path)
+        if ok:
+            st.success(f"Downloaded model from MODEL_URL to `{model_path}`.")
+        else:
+            st.warning("Failed to download model from MODEL_URL. Will fall back to training if dataset is available.")
+
 if os.path.exists(model_path):
     try:
         model = joblib.load(model_path)
